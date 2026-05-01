@@ -1,5 +1,5 @@
 {
-  "name": "FilÃ² â€” Lead Intake",
+  "name": "Filò — Lead Intake",
   "nodes": [
     {
       "parameters": {
@@ -10,13 +10,13 @@
           "rawBody": false
         }
       },
-      "id": "5ad551d8-b16a-48de-b51b-50587435f6dc",
-      "name": "Webhook Â· /filo-lead",
+      "id": "0d1d23c6-98f1-44c0-a98f-32c0fb3dc92c",
+      "name": "Webhook · /filo-lead",
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2,
       "position": [
-        -1008,
-        288
+        -1760,
+        592
       ],
       "webhookId": "filo-lead"
     },
@@ -26,30 +26,32 @@
           "options": {
             "caseSensitive": true,
             "leftValue": "",
-            "typeValidation": "strict"
+            "typeValidation": "strict",
+            "version": 1
           },
-          "combinator": "and",
           "conditions": [
             {
-              "leftValue": "={{ (($json.headers?.['x-filo-webhook-secret'] ?? '').toString()) === (($env.N8N_WEBHOOK_SECRET ?? '').toString()) && (($env.N8N_WEBHOOK_SECRET ?? '').toString().length > 0) }}",
+              "leftValue": "={{ \n  (($json.headers?.['x-filo-webhook-secret'] ?? '').toString() === (($env.LEADINTAKE_WEBHOOK_SECRET ?? '').toString()))\n  && ((($env.LEADINTAKE_WEBHOOK_SECRET ?? '').toString().length > 0))\n}}",
               "rightValue": true,
               "operator": {
                 "type": "boolean",
                 "operation": "true",
                 "singleValue": true
-              }
+              },
+              "id": "5c12fcb4-3dbc-4386-b925-b5bd4c15b542"
             }
-          ]
+          ],
+          "combinator": "and"
         },
         "options": {}
       },
-      "id": "9b8b7007-6484-4bc1-bb52-8fd09e3e7f10",
+      "id": "019a1859-180f-4797-bed1-1c075a1ec076",
       "name": "IF Webhook Secret Valid?",
       "type": "n8n-nodes-base.if",
       "typeVersion": 2,
       "position": [
-        -888,
-        288
+        -1456,
+        592
       ],
       "notesInFlow": true,
       "notes": "Guards production webhook. Header read expression: (($json.headers?.['x-filo-webhook-secret'] ?? '').toString()). Compare with (($env.N8N_WEBHOOK_SECRET ?? '').toString()). Env must be non-empty."
@@ -62,28 +64,28 @@
           "responseCode": 403
         }
       },
-      "id": "d4d93c61-c2f6-446c-9f5d-6c4b888bc4f1",
+      "id": "f667144e-9dd3-4766-bb0e-8324f364ad50",
       "name": "Respond 403 Forbidden",
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.1,
       "position": [
-        -648,
-        448
+        -1088,
+        736
       ],
       "notesInFlow": true,
       "notes": "Stops unauthorized direct webhook calls before validation, Sheets, Telegram, or email nodes."
     },
     {
       "parameters": {
-        "jsCode": "const body = ($input.first().json.body ?? $input.first().json) || {};\n\nconst clean = (v, max = 4000) =>\n  (typeof v === 'string' ? v : '')\n    .replace(/\\s+/g, ' ')\n    .trim()\n    .slice(0, max);\n\nconst normalizeEmail = (v) => clean(v, 254).toLowerCase();\nconst normalizePhone = (v) => clean(v, 40).replace(/[^\\d+]/g, '');\n\nconst emailRe = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;\nconst phoneRe = /^[+\\d][\\d\\s().-]{5,}$/;\nconst allowedInterests = new Set(['galatea', 'cricchetto', 'atlas', 'igea', 'hermes', 'not_sure']);\n\nconst nome = clean(body.nome, 120);\nconst attivita = clean(body.attivita, 160);\nconst settore = clean(body.settore, 120);\nconst email = normalizeEmail(body.email);\nconst email_normalized = email;\nconst telefono = clean(body.telefono, 40);\nconst telefono_normalized = normalizePhone(body.telefono);\nconst citta = clean(body.citta, 120);\nconst prodotto_interesse = clean(body.prodotto_interesse, 40).toLowerCase();\nconst messaggio = clean(body.messaggio, 4000);\nconst consent =\n  body.privacy_consent === 'Yes' ||\n  body.privacy_consent === true ||\n  body.privacy_consent === 'true';\n\nconst errors = [];\nif (!nome) errors.push('nome');\nif (!attivita) errors.push('attivita');\nif (!settore) errors.push('settore');\nif (!email || !emailRe.test(email)) errors.push('email');\nif (!telefono || !phoneRe.test(telefono)) errors.push('telefono');\nif (!messaggio) errors.push('messaggio');\nif (!prodotto_interesse || !allowedInterests.has(prodotto_interesse)) errors.push('prodotto_interesse');\nif (!consent) errors.push('privacy_consent');\n\nif (errors.length) {\n  return [{\n    json: {\n      __ok: false,\n      status: 400,\n      error: 'Dati non validi',\n      fields: errors\n    }\n  }];\n}\n\nconst lead_id = `lead_${Date.now()}_${Math.random().toString(36).slice(2, 10)}`;\nconst created_at = new Date().toISOString();\n\nreturn [\n  {\n    json: {\n      __ok: true,\n      lead_id,\n      created_at,\n      nome,\n      attivita,\n      settore,\n      email,\n      email_normalized,\n      telefono,\n      telefono_normalized,\n      citta,\n      prodotto_interesse,\n      messaggio,\n      privacy_consent: 'Yes',\n      source: 'website',\n      status: 'new',\n      owner_notified: false,\n      customer_email_sent: false,\n      note: ''\n    }\n  }\n];"
+        "jsCode": "const body = ($input.first().json.body ?? $input.first().json) || {};\n\nconst clean = (v, max = 4000) =>\n  (typeof v === 'string' ? v : '')\n    .replace(/\\s+/g, ' ')\n    .trim()\n    .slice(0, max);\n\nconst normalizeEmail = (v) => clean(v, 254).toLowerCase();\nconst normalizePhone = (v) => clean(v, 40).replace(/[^\\d+]/g, '');\n\nconst emailRe = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;\nconst phoneRe = /^[+\\d][\\d\\s().-]{5,}$/;\n\nconst allowedInterests = new Set([\n  'galatea',\n  'cricchetto',\n  'atlas',\n  'igea',\n  'hermes',\n  'not_sure',\n]);\n\nconst nome = clean(body.nome, 120);\nconst attivita = clean(body.attivita, 160);\nconst settore = clean(body.settore, 120);\nconst email = normalizeEmail(body.email);\nconst email_normalized = email;\nconst telefono = clean(body.telefono, 40);\nconst telefono_normalized = normalizePhone(body.telefono);\nconst citta = clean(body.citta, 120);\nconst prodotto_interesse = clean(body.prodotto_interesse, 40).toLowerCase();\nconst messaggio = clean(body.messaggio, 4000);\n\nconst consent =\n  body.privacy_consent === 'Yes' ||\n  body.privacy_consent === true ||\n  body.privacy_consent === 'true';\n\nconst errors = [];\n\nif (!nome) errors.push('nome');\nif (!attivita) errors.push('attivita');\nif (!settore) errors.push('settore');\nif (!email || !emailRe.test(email)) errors.push('email');\nif (!telefono || !phoneRe.test(telefono)) errors.push('telefono');\nif (!messaggio) errors.push('messaggio');\nif (!prodotto_interesse || !allowedInterests.has(prodotto_interesse)) {\n  errors.push('prodotto_interesse');\n}\nif (!consent) errors.push('privacy_consent');\n\nif (errors.length) {\n  return [\n    {\n      json: {\n        __ok: false,\n        status: 400,\n        error: 'Dati non validi',\n        fields: errors,\n      },\n    },\n  ];\n}\n\nconst lead_id = `lead_${Date.now()}_${Math.random().toString(36).slice(2, 10)}`;\nconst created_at = new Date().toISOString();\n\nreturn [\n  {\n    json: {\n      __ok: true,\n      lead_id,\n      created_at,\n      nome,\n      attivita,\n      settore,\n      email,\n      email_normalized,\n      telefono,\n      telefono_normalized,\n      citta,\n      prodotto_interesse,\n      messaggio,\n      privacy_consent: 'Yes',\n      source: 'website',\n      status: 'new',\n      owner_notified: false,\n      customer_email_sent: false,\n      customer_email_sent_at: '',\n      note: '',\n    },\n  },\n];"
       },
-      "id": "7470197d-42de-4efb-8fab-daa7ea00413f",
+      "id": "d451f3f7-9e33-449f-8233-a5f3f808f1d0",
       "name": "Normalize + Validate",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -768,
-        288
+        -1200,
+        576
       ]
     },
     {
@@ -109,13 +111,13 @@
         },
         "options": {}
       },
-      "id": "db108e63-e758-440a-b203-d9dbafb311e2",
+      "id": "79932649-1d08-44fe-82f6-9db927e784d6",
       "name": "IF valid",
       "type": "n8n-nodes-base.if",
       "typeVersion": 2,
       "position": [
-        -528,
-        288
+        -960,
+        576
       ]
     },
     {
@@ -313,13 +315,13 @@
         },
         "options": {}
       },
-      "id": "0b5ef660-6bf1-4bcc-8005-1bf6b928df3c",
-      "name": "Google Sheets Â· Append Lead",
+      "id": "96c3873b-62d5-4016-b2bf-e6029dedbb17",
+      "name": "Google Sheets · Append Lead",
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4,
       "position": [
-        -240,
-        192
+        -672,
+        480
       ],
       "credentials": {
         "googleSheetsOAuth2Api": {
@@ -331,21 +333,25 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "=https://api.telegram.org/bot8759063589:AAEsQ0QQzwAsIcjef3Isk8VKjMdXoNxUEJM/sendMessage",
+        "url": "=https://api.telegram.org/bot{{$env.LEADINTAKE_TELEGRAM_BOT_TOKEN}}/sendMessage",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"chat_id\": \"147715726\",\n  \"text\": \"Nuovo lead dal sito\\n\\nNome: {{ $json.nome }}\\nAzienda: {{ $json.attivita }}\\nSettore: {{ $json.settore }}\\nEmail: {{ $json.email }}\\nTelefono: {{ $json.telefono }}\\nCittÃ : {{ $json.citta }}\\nInteresse: {{ $json.prodotto_interesse }}\\nMessaggio: {{ $json.messaggio }}\\nData: {{ $json.created_at }}\",\n  \"disable_web_page_preview\": true\n}",
+        "jsonBody": "={
+  "chat_id": "{{ $env.LEADINTAKE_TELEGRAM_CHAT_ID }}",
+  "text": "Nuovo lead dal sito\n\nNome: {{ $json.nome }}\nAzienda: {{ $json.attivita }}\nSettore: {{ $json.settore }}\nEmail: {{ $json.email }}\nTelefono: {{ $json.telefono }}\nCittà: {{ $json.citta }}\nInteresse: {{ $json.prodotto_interesse }}\nMessaggio: {{ $json.messaggio }}\nData: {{ $json.created_at }}",
+  "disable_web_page_preview": true
+}",
         "options": {
           "timeout": 8000
         }
       },
-      "id": "aa87233e-d0cb-41cc-a1a4-d5784e06eda1",
-      "name": "Telegram Â· Notify Owner",
+      "id": "54a773dc-60ed-4a11-81d8-ee14917de5ab",
+      "name": "Telegram · Notify Owner",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        0,
-        192
+        -432,
+        480
       ],
       "notesInFlow": true,
       "continueOnFail": true,
@@ -359,13 +365,13 @@
           "responseCode": 400
         }
       },
-      "id": "36b49d87-d06b-4e6e-8c9d-e5855c39c9ba",
+      "id": "acb9f19e-4be3-461c-bc9f-9a9c8c198d3e",
       "name": "Respond 400",
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.1,
       "position": [
-        -240,
-        400
+        -672,
+        688
       ]
     },
     {
@@ -452,13 +458,13 @@
         },
         "options": {}
       },
-      "id": "ec726ff4-88bd-475b-986e-d1ec7355a972",
-      "name": "Log Â· Sheets OK",
+      "id": "efc8695b-47a0-4a70-8165-b55291e760ab",
+      "name": "Log · Sheets OK",
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4,
       "position": [
-        -112,
-        -64
+        -544,
+        224
       ],
       "credentials": {
         "googleSheetsOAuth2Api": {
@@ -553,13 +559,13 @@
         },
         "options": {}
       },
-      "id": "8e1a52c9-bad6-4e18-8fe7-e7022dae3d9f",
-      "name": "Log Â· Telegram Result",
+      "id": "262cb643-d1b2-4808-8a90-0263c1fe0fd2",
+      "name": "Log · Telegram Result",
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4,
       "position": [
-        960,
-        48
+        528,
+        336
       ],
       "credentials": {
         "googleSheetsOAuth2Api": {
@@ -573,42 +579,42 @@
       "parameters": {
         "fromEmail": "={{ $env.MAIL_FROM }}",
         "toEmail": "={{ $env.MAIL_FROM }}",
-        "subject": "=[FilÃ²] Backup interno lead â€” {{ $('Normalize + Validate').item.json.lead_id }}",
+        "subject": "=[Filò] Backup interno lead — {{ $('Normalize + Validate').item.json.lead_id }}",
         "emailFormat": "text",
         "text": "=Backup interno del lead appena ricevuto (solo per owner, non per il cliente).\n\nlead_id: {{ $('Normalize + Validate').item.json.lead_id }}\ncreated_at: {{ $('Normalize + Validate').item.json.created_at }}\nnome: {{ $('Normalize + Validate').item.json.nome }}\nattivita: {{ $('Normalize + Validate').item.json.attivita }}\nsettore: {{ $('Normalize + Validate').item.json.settore }}\nemail: {{ $('Normalize + Validate').item.json.email }}\ntelefono: {{ $('Normalize + Validate').item.json.telefono }}\ncitta: {{ $('Normalize + Validate').item.json.citta }}\ninteresse: {{ $('Normalize + Validate').item.json.prodotto_interesse }}\nmessaggio: {{ $('Normalize + Validate').item.json.messaggio }}",
         "options": {}
       },
-      "id": "3c3332f6-059b-49d1-8e30-50a6a3926ba9",
-      "name": "Owner Email Â· Internal Backup (SCAFFOLD)",
+      "id": "951c225a-380c-4538-8438-89ec285435d6",
+      "name": "Owner Email · Internal Backup (SCAFFOLD)",
       "type": "n8n-nodes-base.emailSend",
       "typeVersion": 2.1,
       "position": [
-        1360,
-        192
+        976,
+        16
       ],
       "notesInFlow": true,
       "webhookId": "67188248-c3b8-47a4-b766-a2d9d301faae",
       "disabled": true,
       "continueOnFail": true,
-      "notes": "SCAFFOLD â€” disabilitato. Attivare SOLO quando una credenziale SMTP reale Ã¨ presente (SMTP_HOST/PORT/USER/PASS in n8n + credenziale 'smtp' collegata). Invia all'owner un backup interno del lead. Non Ã¨ l'email di conferma cliente: destinatario = MAIL_FROM = info@filo-ai.it. continueOnFail=true per non bloccare il flusso. manca: provider SMTP reale."
+      "notes": "SCAFFOLD — disabilitato. Attivare SOLO quando una credenziale SMTP reale è presente (SMTP_HOST/PORT/USER/PASS in n8n + credenziale 'smtp' collegata). Invia all'owner un backup interno del lead. Non è l'email di conferma cliente: destinatario = MAIL_FROM = info@filo-ai.it. continueOnFail=true per non bloccare il flusso. manca: provider SMTP reale."
     },
     {
       "parameters": {
-        "from": "FilÃ² <info@send.filo-ai.it>",
+        "from": "Filò <info@send.filo-ai.it>",
         "to": "={{ $('Normalize + Validate').item.json.email }}",
-        "subject": "Abbiamo ricevuto la tua richiesta â€” FilÃ²",
+        "subject": "Abbiamo ricevuto la tua richiesta — Filò",
         "emailFormat": "text",
-        "text": "=Ciao {{ $('Normalize + Validate').item.json.nome }},\n\nabbiamo ricevuto correttamente la tua richiesta di contatto per FilÃ².\n\nTi ricontatteremo il prima possibile per approfondire la tua esigenza relativa a {{ $('Normalize + Validate').item.json.prodotto_interesse }}.\n\nRiepilogo richiesta:\n- Nome: {{ $('Normalize + Validate').item.json.nome }}\n- Azienda: {{ $('Normalize + Validate').item.json.attivita }}\n- Settore: {{ $('Normalize + Validate').item.json.settore }}\n- Email: {{ $('Normalize + Validate').item.json.email }}\n- Telefono: {{ $('Normalize + Validate').item.json.telefono }}\n- CittÃ : {{ $('Normalize + Validate').item.json.citta }}\n- Interesse: {{ $('Normalize + Validate').item.json.prodotto_interesse }}\n\nMessaggio:\n{{ $('Normalize + Validate').item.json.messaggio }}\n\nGrazie,\nFilÃ²\ninfo@filo-ai.it",
+        "text": "=Ciao {{ $('Normalize + Validate').item.json.nome }},\n\nabbiamo ricevuto correttamente la tua richiesta di contatto per Filò.\n\nTi ricontatteremo il prima possibile per approfondire la tua esigenza relativa a {{ $('Normalize + Validate').item.json.prodotto_interesse }}.\n\nRiepilogo richiesta:\n- Nome: {{ $('Normalize + Validate').item.json.nome }}\n- Azienda: {{ $('Normalize + Validate').item.json.attivita }}\n- Settore: {{ $('Normalize + Validate').item.json.settore }}\n- Email: {{ $('Normalize + Validate').item.json.email }}\n- Telefono: {{ $('Normalize + Validate').item.json.telefono }}\n- Città: {{ $('Normalize + Validate').item.json.citta }}\n- Interesse: {{ $('Normalize + Validate').item.json.prodotto_interesse }}\n\nMessaggio:\n{{ $('Normalize + Validate').item.json.messaggio }}\n\nGrazie,\nFilò\ninfo@filo-ai.it",
         "additionalOptions": {}
       },
       "type": "n8n-nodes-resend.resend",
       "typeVersion": 1,
       "position": [
-        112,
-        640
+        -320,
+        928
       ],
-      "id": "b88ceb5f-26b2-4cf4-9dfe-a6120765beb6",
-      "name": "Customer Email Â· Confirm",
+      "id": "37beeae4-3127-4897-8257-89c9404b0607",
+      "name": "Customer Email · Confirm",
       "webhookId": "b8b40949-11ef-43ef-8f5b-7f95204b48a6",
       "retryOnFail": true,
       "credentials": {
@@ -627,13 +633,13 @@
           "responseCode": 200
         }
       },
-      "id": "2451b8a5-5b9e-4633-aedc-5b5533e382ac",
+      "id": "59f9ebe3-2a4d-4194-b8a5-c0ce6b5b857d",
       "name": "Respond ",
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.1,
       "position": [
-        1760,
-        640
+        1328,
+        928
       ]
     },
     {
@@ -852,11 +858,11 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        912,
-        640
+        480,
+        928
       ],
-      "id": "17ceaa1e-c497-407a-847a-33e3188d3259",
-      "name": "Google Sheets Â· Update Lead Email Status",
+      "id": "859690d5-4a67-4225-8199-7214c4bd5fb6",
+      "name": "Google Sheets · Update Lead Email Status",
       "credentials": {
         "googleSheetsOAuth2Api": {
           "id": "T99OoUZYRdCcx7JO",
@@ -957,11 +963,11 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        1280,
-        640
+        848,
+        928
       ],
-      "id": "3ac9fc5d-2fb3-442e-9b01-0ceb2c017cda",
-      "name": "Log Â· Customer Email Result",
+      "id": "72df022e-fe88-4ada-9ade-4e30c9e33437",
+      "name": "Log · Customer Email Result",
       "credentials": {
         "googleSheetsOAuth2Api": {
           "id": "T99OoUZYRdCcx7JO",
@@ -998,11 +1004,11 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        688,
-        304
+        256,
+        592
       ],
-      "id": "f78d2a59-97b5-4197-a6c4-c88199fb3864",
-      "name": "Google Sheets Â· Read Lead Email Status",
+      "id": "f34c93e7-2b4a-4a48-8e4d-ab6da7e970c9",
+      "name": "Google Sheets · Read Lead Email Status",
       "alwaysOutputData": true,
       "credentials": {
         "googleSheetsOAuth2Api": {
@@ -1039,10 +1045,10 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        992,
-        304
+        560,
+        592
       ],
-      "id": "b9be5006-2142-4676-841f-e7e4a3893a22",
+      "id": "48d4d2c9-de61-45a0-a7d7-5271542daa2e",
       "name": "If"
     },
     {
@@ -1117,10 +1123,10 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        496,
-        640
+        64,
+        928
       ],
-      "id": "98b538c1-25ef-43b7-bc27-9e4f38da4a47",
+      "id": "9f95cbb4-7256-43ba-8700-f8bd22f6bea4",
       "name": "Google Sheets - Append Email_Sent",
       "credentials": {
         "googleSheetsOAuth2Api": {
@@ -1375,10 +1381,10 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        432,
-        -288
+        0,
+        0
       ],
-      "id": "e3d9d042-ae3b-46a7-89d8-efe1dcd7a6bf",
+      "id": "ecca8e04-1512-4c29-b9d8-425937dc9bc0",
       "name": "Google Sheets - Update Owner Notified",
       "credentials": {
         "googleSheetsOAuth2Api": {
@@ -1415,16 +1421,16 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        240,
-        192
+        -192,
+        480
       ],
-      "id": "4c3c5353-75cf-4559-8ad6-ecc0b80e296c",
+      "id": "8af5ab77-0d4a-4cd4-8149-3cd107d04f1a",
       "name": "IF Telegram Success"
     }
   ],
   "pinData": {},
   "connections": {
-    "Webhook Â· /filo-lead": {
+    "Webhook · /filo-lead": {
       "main": [
         [
           {
@@ -1468,7 +1474,7 @@
       "main": [
         [
           {
-            "node": "Google Sheets Â· Append Lead",
+            "node": "Google Sheets · Append Lead",
             "type": "main",
             "index": 0
           }
@@ -1482,23 +1488,23 @@
         ]
       ]
     },
-    "Google Sheets Â· Append Lead": {
+    "Google Sheets · Append Lead": {
       "main": [
         [
           {
-            "node": "Telegram Â· Notify Owner",
+            "node": "Telegram · Notify Owner",
             "type": "main",
             "index": 0
           },
           {
-            "node": "Log Â· Sheets OK",
+            "node": "Log · Sheets OK",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Telegram Â· Notify Owner": {
+    "Telegram · Notify Owner": {
       "main": [
         [
           {
@@ -1509,12 +1515,7 @@
         ]
       ]
     },
-    "Log Â· Telegram Result": {
-      "main": [
-        []
-      ]
-    },
-    "Customer Email Â· Confirm": {
+    "Customer Email · Confirm": {
       "main": [
         [
           {
@@ -1525,18 +1526,18 @@
         ]
       ]
     },
-    "Google Sheets Â· Update Lead Email Status": {
+    "Google Sheets · Update Lead Email Status": {
       "main": [
         [
           {
-            "node": "Log Â· Customer Email Result",
+            "node": "Log · Customer Email Result",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Log Â· Customer Email Result": {
+    "Log · Customer Email Result": {
       "main": [
         [
           {
@@ -1547,7 +1548,7 @@
         ]
       ]
     },
-    "Google Sheets Â· Read Lead Email Status": {
+    "Google Sheets · Read Lead Email Status": {
       "main": [
         [
           {
@@ -1569,7 +1570,7 @@
         ],
         [
           {
-            "node": "Customer Email Â· Confirm",
+            "node": "Customer Email · Confirm",
             "type": "main",
             "index": 0
           }
@@ -1580,7 +1581,7 @@
       "main": [
         [
           {
-            "node": "Google Sheets Â· Update Lead Email Status",
+            "node": "Google Sheets · Update Lead Email Status",
             "type": "main",
             "index": 0
           }
@@ -1591,12 +1592,12 @@
       "main": [
         [
           {
-            "node": "Owner Email Â· Internal Backup (SCAFFOLD)",
+            "node": "Owner Email · Internal Backup (SCAFFOLD)",
             "type": "main",
             "index": 0
           },
           {
-            "node": "Google Sheets Â· Read Lead Email Status",
+            "node": "Google Sheets · Read Lead Email Status",
             "type": "main",
             "index": 0
           }
@@ -1614,12 +1615,12 @@
         ],
         [
           {
-            "node": "Log Â· Telegram Result",
+            "node": "Log · Telegram Result",
             "type": "main",
             "index": 0
           },
           {
-            "node": "Google Sheets Â· Read Lead Email Status",
+            "node": "Google Sheets · Read Lead Email Status",
             "type": "main",
             "index": 0
           }
@@ -1632,11 +1633,11 @@
     "executionOrder": "v1",
     "binaryMode": "separate"
   },
-  "versionId": "edae18d4-5cda-4426-b7da-7b3974ccc7bc",
+  "versionId": "035442f1-4e2e-4084-adf0-6ae6f5972616",
   "meta": {
     "instanceId": "df5384e6f2347cd6ede64b56224851f2aa5ed4e48945650250d840858c4282a4"
   },
-  "id": "6OrXVAvDxMRSIeHd",
+  "id": "bC7n24LIUC7FTVDX",
   "tags": [
     {
       "updatedAt": "2026-04-20T21:43:24.052Z",
