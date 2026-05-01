@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 82" fill="none">
+  <!--
+    Filò Full Logo — Symbol Mark + Wordmark
+    Symbol occupies left 82px, wordmark follows with 20px gap.
+  -->
+
+  <!-- ── Symbol ── -->
+  <g fill="white">
+    <!-- L1 · Vertical arm -->
+    <rect x="8"  y="15" width="5" height="46"/>
+    <rect x="17" y="15" width="5" height="37"/>
+    <rect x="26" y="15" width="5" height="28"/>
+    <!-- L1 · Horizontal arm -->
+    <rect x="8"  y="56" width="46" height="5"/>
+    <rect x="8"  y="47" width="37" height="5"/>
+    <rect x="8"  y="38" width="28" height="5"/>
+    <!-- L2 · Vertical arm -->
+    <rect x="69" y="21" width="5" height="46"/>
+    <rect x="60" y="30" width="5" height="37"/>
+    <rect x="51" y="39" width="5" height="28"/>
+    <!-- L2 · Horizontal arm -->
+    <rect x="28" y="21" width="46" height="5"/>
+    <rect x="37" y="30" width="37" height="5"/>
+    <rect x="46" y="39" width="28" height="5"/>
+  </g>
+
+  <!-- ── Wordmark ── -->
+  <!-- "Filo" in white -->
+  <text
+    x="102"
+    y="53"
+    font-family="'Inter', 'Helvetica Neue', Arial, sans-serif"
+    font-size="34"
+    font-weight="600"
+    letter-spacing="-1.5"
+    fill="white"
+  >Filo</text>
+
+  <!-- Teal grave-accent on the "o" -->
+  <path
+    d="M 218 43 L 211 25"
+    stroke="#2DD4BF"
+    stroke-width="3.5"
+    stroke-linecap="round"
+    opacity="0.95"
+  />
+</svg>

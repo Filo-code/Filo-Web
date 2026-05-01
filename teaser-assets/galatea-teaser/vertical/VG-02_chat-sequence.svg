@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1920" width="1080" height="1920">
+  <defs>
+    <linearGradient id="phone" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#111"/>
+      <stop offset="100%" stop-color="#0A0A0A"/>
+    </linearGradient>
+  </defs>
+  <rect width="1080" height="1920" fill="#030303"/>
+
+  <!-- full-bleed WA feel -->
+  <rect x="0" y="0" width="1080" height="1920" fill="#0B141A"/>
+  <rect x="0" y="0" width="1080" height="160" fill="#075E54"/>
+  <circle cx="120" cy="90" r="38" fill="#25D366"/>
+  <text x="122" y="100" font-family="Inter, sans-serif" font-size="32" font-weight="700" fill="#ffffff" text-anchor="middle">M</text>
+  <text x="190" y="80" font-family="Inter, sans-serif" font-size="30" font-weight="600" fill="#ffffff">Marco Verdi</text>
+  <text x="190" y="118" font-family="Inter, sans-serif" font-size="18" fill="#10B981">Galatea sta rispondendo…</text>
+
+  <!-- Inbound -->
+  <g transform="translate(60 220)">
+    <rect width="720" height="160" rx="22" fill="#202C33"/>
+    <text x="30" y="60" font-family="Inter, sans-serif" font-size="26" fill="#ffffff">Ciao, scusate — sono bloccato</text>
+    <text x="30" y="96" font-family="Inter, sans-serif" font-size="26" fill="#ffffff">in riunione. Sposto di 15 min</text>
+    <text x="30" y="132" font-family="Inter, sans-serif" font-size="26" fill="#ffffff">il taglio delle 11:15?</text>
+  </g>
+
+  <!-- AI reply -->
+  <g transform="translate(300 430)">
+    <rect width="720" height="230" rx="22" fill="#005C4B"/>
+    <text x="30" y="60" font-family="Inter, sans-serif" font-size="26" fill="#ffffff">Ciao Marco, nessun problema —</text>
+    <text x="30" y="96" font-family="Inter, sans-serif" font-size="26" fill="#ffffff">spostato il Taglio Uomo alle</text>
+    <text x="30" y="142" font-family="Inter, sans-serif" font-size="34" font-weight="700" fill="#ffffff">11:30</text>
+    <text x="30" y="186" font-family="Inter, sans-serif" font-size="22" fill="#ffffff" fill-opacity="0.8">Ti aspettiamo ✂️</text>
+    <text x="680" y="212" font-family="Inter, sans-serif" font-size="16" text-anchor="end" fill="#ffffff" fill-opacity="0.7">11:02 ✓✓</text>
+  </g>
+
+  <!-- badge -->
+  <g transform="translate(300 700)">
+    <rect width="280" height="46" rx="23" fill="#10B981" fill-opacity="0.2" stroke="#10B981" stroke-opacity="0.5"/>
+    <circle cx="28" cy="23" r="6" fill="#10B981"/>
+    <text x="52" y="30" font-family="Inter, sans-serif" font-size="18" font-weight="600" fill="#10B981">Gestito da Galatea</text>
+  </g>
+
+  <!-- Caption top -->
+  <g transform="translate(60 1600)" font-family="Inter, sans-serif">
+    <rect width="960" height="220" rx="20" fill="#030303" fill-opacity="0.9" stroke="#10B981" stroke-opacity="0.2"/>
+    <text x="40" y="70" font-size="44" font-weight="700" fill="#ffffff">Risponde da sola.</text>
+    <text x="40" y="120" font-size="44" font-weight="700" fill="#10B981">In 3 secondi.</text>
+    <text x="40" y="170" font-size="22" fill="#ffffff" fill-opacity="0.6">Con il tuo tono. Con le tue regole.</text>
+  </g>
+</svg>

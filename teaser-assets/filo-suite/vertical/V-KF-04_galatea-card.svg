@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1920" width="1080" height="1920">
+  <defs>
+    <radialGradient id="gGlow" cx="80%" cy="10%" r="60%">
+      <stop offset="0%" stop-color="#10B981" stop-opacity="0.18"/>
+      <stop offset="100%" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1080" height="1920" fill="#030303"/>
+
+  <g transform="translate(60 320)">
+    <rect width="960" height="1080" rx="24" fill="#0A0A0A" stroke="#ffffff" stroke-opacity="0.05"/>
+    <rect width="960" height="1080" rx="24" fill="url(#gGlow)"/>
+
+    <g transform="translate(40 40)" font-family="Inter, sans-serif">
+      <text font-size="28" font-weight="600" fill="#ffffff" y="32">Galatea</text>
+      <g transform="translate(160 8)">
+        <rect width="150" height="30" rx="15" fill="#10B981" fill-opacity="0.1" stroke="#10B981" stroke-opacity="0.35"/>
+        <circle cx="16" cy="15" r="4" fill="#10B981"/>
+        <text x="30" y="20" font-size="13" font-weight="600" fill="#10B981">Più richiesto</text>
+      </g>
+      <text y="70" font-size="13" fill="#ffffff" fill-opacity="0.4" letter-spacing="0.2em">SALONI · ESTETICA · BARBIERI</text>
+    </g>
+
+    <g transform="translate(40 160)" font-family="Inter, sans-serif">
+      <text font-size="18" font-weight="600" fill="#ffffff" fill-opacity="0.85">Agenda di Oggi</text>
+      <text y="28" font-size="13" fill="#ffffff" fill-opacity="0.5">14 appuntamenti gestiti da Galatea</text>
+
+      <g transform="translate(0 60)">
+        <rect width="880" height="90" rx="14" fill="#ffffff" fill-opacity="0.025" stroke="#ffffff" stroke-opacity="0.05"/>
+        <rect width="5" height="90" rx="2" fill="#10B981" fill-opacity="0.55"/>
+        <text x="24" y="38" font-size="18" font-weight="500" fill="#ffffff">Giulia Bianchi</text>
+        <text x="24" y="64" font-size="14" fill="#ffffff" fill-opacity="0.5">Balayage + Piega</text>
+        <text x="850" y="38" font-size="14" text-anchor="end" font-family="ui-monospace, monospace" fill="#ffffff" fill-opacity="0.4">09:30</text>
+        <rect x="680" y="52" width="170" height="26" rx="13" fill="#10B981" fill-opacity="0.1"/>
+        <text x="765" y="70" font-size="12" text-anchor="middle" fill="#10B981">In Salone</text>
+      </g>
+
+      <g transform="translate(0 170)">
+        <rect width="880" height="90" rx="14" fill="#ffffff" fill-opacity="0.025" stroke="#ffffff" stroke-opacity="0.05"/>
+        <rect width="5" height="90" rx="2" fill="#10B981" fill-opacity="0.55"/>
+        <text x="24" y="38" font-size="18" font-weight="500" fill="#ffffff">Marco Verdi</text>
+        <text x="24" y="64" font-size="14" fill="#ffffff" fill-opacity="0.5">Taglio Uomo</text>
+        <text x="850" y="38" font-size="14" text-anchor="end" font-family="ui-monospace, monospace" fill="#ffffff" fill-opacity="0.4">11:15</text>
+        <rect x="640" y="52" width="210" height="26" rx="13" fill="#10B981" fill-opacity="0.1"/>
+        <text x="745" y="70" font-size="12" text-anchor="middle" fill="#10B981">Confermato via WA</text>
+      </g>
+
+      <g transform="translate(0 280)">
+        <rect width="880" height="90" rx="14" fill="#ffffff" fill-opacity="0.025" stroke="#ffffff" stroke-opacity="0.05"/>
+        <text x="24" y="38" font-size="18" font-weight="500" fill="#ffffff">Elena F.</text>
+        <text x="24" y="64" font-size="14" fill="#ffffff" fill-opacity="0.5">Consulenza Extension</text>
+        <text x="850" y="38" font-size="14" text-anchor="end" font-family="ui-monospace, monospace" fill="#ffffff" fill-opacity="0.4">14:00</text>
+        <rect x="620" y="52" width="230" height="26" rx="13" fill="#F59E0B" fill-opacity="0.13"/>
+        <text x="735" y="70" font-size="12" text-anchor="middle" fill="#F59E0B">In attesa di risposta</text>
+      </g>
+
+      <g transform="translate(0 410)">
+        <rect width="880" height="180" rx="16" fill="#10B981" fill-opacity="0.05" stroke="#10B981" stroke-opacity="0.2"/>
+        <text x="30" y="40" font-size="13" fill="#10B981" fill-opacity="0.7" letter-spacing="0.2em">AI ASSISTANT · ATTIVO</text>
+        <text x="30" y="90" font-size="26" font-weight="700" fill="#ffffff">128 prenotazioni</text>
+        <text x="30" y="124" font-size="15" fill="#ffffff" fill-opacity="0.5">+14% · 42h salvate questo mese</text>
+      </g>
+    </g>
+  </g>
+
+  <g transform="translate(60 1560)" font-family="Inter, sans-serif">
+    <text font-size="72" font-weight="700" fill="#ffffff" letter-spacing="-0.03em">Galatea</text>
+    <text y="56" font-size="26" fill="#ffffff" fill-opacity="0.6">Il cuore operativo.</text>
+  </g>
+</svg>

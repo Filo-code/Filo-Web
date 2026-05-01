@@ -1,0 +1,2 @@
+timestamp,lead_id,step,esito,errore,detail
+2026-04-20T10:00:01.000Z,lead_1745150400000_a1b2c3d4,sheets_append,success,,row_index=2

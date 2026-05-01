@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1920" width="1080" height="1920">
+  <defs>
+    <radialGradient id="fGlow" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.06"/>
+      <stop offset="100%" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1080" height="1920" fill="#030303"/>
+  <rect width="1080" height="1920" fill="url(#fGlow)"/>
+
+  <g font-family="Inter, sans-serif" text-anchor="middle">
+    <text x="540" y="820" font-size="220" font-weight="700" fill="#ffffff" letter-spacing="-0.04em">Filò</text>
+    <text x="540" y="890" font-size="18" fill="#ffffff" fill-opacity="0.5" letter-spacing="0.3em">L'ECOSISTEMA</text>
+  </g>
+
+  <g transform="translate(180 1100)">
+    <rect width="720" height="96" rx="48" fill="#ffffff" fill-opacity="0.95"/>
+    <text x="360" y="60" font-family="Inter, sans-serif" font-size="22" font-weight="600" fill="#030303" text-anchor="middle">Parla con Filò →</text>
+  </g>
+
+  <g transform="translate(540 1280)" text-anchor="middle" font-family="Inter, sans-serif">
+    <text font-size="20" fill="#ffffff" fill-opacity="0.55">filo.it</text>
+  </g>
+
+  <g transform="translate(450 1420)">
+    <circle cx="0" cy="0" r="6" fill="#10B981"/>
+    <circle cx="60" cy="0" r="6" fill="#6366F1"/>
+    <circle cx="120" cy="0" r="6" fill="#22D3EE" fill-opacity="0.5"/>
+    <circle cx="180" cy="0" r="6" fill="#F59E0B" fill-opacity="0.5"/>
+  </g>
+</svg>

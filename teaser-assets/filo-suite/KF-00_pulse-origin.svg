@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <defs>
+    <linearGradient id="line" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#ffffff" stop-opacity="0.10"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.04"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="bloom" x="-200%" y="-200%" width="500%" height="500%">
+      <feGaussianBlur stdDeviation="6"/>
+    </filter>
+  </defs>
+
+  <rect width="1920" height="1080" fill="#030303"/>
+  <circle cx="960" cy="540" r="260" fill="url(#glow)"/>
+  <rect x="0" y="539" width="1920" height="2" fill="url(#line)"/>
+
+  <g>
+    <circle cx="960" cy="540" r="14" fill="#ffffff" fill-opacity="0.25" filter="url(#bloom)"/>
+    <circle cx="960" cy="540" r="5" fill="#ffffff"/>
+  </g>
+
+  <!-- grain placeholder (motion designer to overlay 4% noise) -->
+</svg>

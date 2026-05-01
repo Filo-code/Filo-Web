@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <defs>
+    <linearGradient id="textGrad" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.5"/>
+    </linearGradient>
+  </defs>
+  <rect width="1920" height="1080" fill="#030303"/>
+  <g font-family="Inter, system-ui, sans-serif" font-weight="700" text-anchor="middle" letter-spacing="-0.03em">
+    <text x="960" y="500" font-size="120" fill="#ffffff">Non un software.</text>
+    <text x="960" y="640" font-size="120" fill="url(#textGrad)">Un ecosistema.</text>
+  </g>
+</svg>

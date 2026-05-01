@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 82 82" fill="none">
+  <!--
+    Filò Symbol Mark
+    Two interlocked L-brackets, each composed of 3 parallel strokes.
+    L1: corner at top-left, opens toward bottom-right.
+    L2: corner at bottom-right, opens toward top-left (180° point-rotation of L1).
+  -->
+  <g fill="white">
+    <!-- L1 · Vertical arm (left side, 3 strokes — outer longest, inner shortest) -->
+    <rect x="8"  y="8" width="5" height="46"/>
+    <rect x="17" y="8" width="5" height="37"/>
+    <rect x="26" y="8" width="5" height="28"/>
+
+    <!-- L1 · Horizontal arm (bottom area, 3 strokes — outer widest, inner narrowest) -->
+    <rect x="8"  y="49" width="46" height="5"/>
+    <rect x="8"  y="40" width="37" height="5"/>
+    <rect x="8"  y="31" width="28" height="5"/>
+
+    <!-- L2 · Vertical arm (right side, 3 strokes — outer longest, inner shortest) -->
+    <rect x="69" y="28" width="5" height="46"/>
+    <rect x="60" y="37" width="5" height="37"/>
+    <rect x="51" y="46" width="5" height="28"/>
+
+    <!-- L2 · Horizontal arm (top area, 3 strokes — outer widest, inner narrowest) -->
+    <rect x="28" y="28" width="46" height="5"/>
+    <rect x="37" y="37" width="37" height="5"/>
+    <rect x="46" y="46" width="28" height="5"/>
+  </g>
+</svg>

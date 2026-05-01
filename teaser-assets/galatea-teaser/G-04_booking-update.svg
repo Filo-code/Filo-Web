@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <defs>
+    <radialGradient id="gGlow" cx="90%" cy="10%" r="50%">
+      <stop offset="0%" stop-color="#10B981" stop-opacity="0.15"/>
+      <stop offset="100%" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1920" height="1080" fill="#030303"/>
+
+  <g transform="translate(360 180)">
+    <rect width="1200" height="720" rx="24" fill="#0A0A0A" stroke="#ffffff" stroke-opacity="0.05"/>
+    <rect width="1200" height="720" rx="24" fill="url(#gGlow)"/>
+
+    <g transform="translate(40 40)" font-family="Inter, sans-serif">
+      <text font-size="24" font-weight="600" fill="#ffffff" y="28">Agenda · Oggi</text>
+      <text y="58" font-size="13" fill="#ffffff" fill-opacity="0.45">Aggiornamento automatico · Galatea</text>
+    </g>
+
+    <!-- row before → after -->
+    <g transform="translate(40 140)" font-family="Inter, sans-serif">
+      <!-- old row, fading -->
+      <g opacity="0.35">
+        <rect width="1120" height="80" rx="14" fill="#ffffff" fill-opacity="0.025" stroke="#ffffff" stroke-opacity="0.05"/>
+        <rect width="5" height="80" rx="2" fill="#10B981" fill-opacity="0.55"/>
+        <text x="26" y="34" font-size="18" font-weight="500" fill="#ffffff">Marco Verdi</text>
+        <text x="26" y="58" font-size="14" fill="#ffffff" fill-opacity="0.5">Taglio Uomo</text>
+        <text x="1090" y="34" font-size="16" text-anchor="end" font-family="ui-monospace, monospace" fill="#ffffff" fill-opacity="0.5" text-decoration="line-through">11:15</text>
+      </g>
+
+      <!-- new row -->
+      <g transform="translate(0 104)">
+        <rect width="1120" height="80" rx="14" fill="#10B981" fill-opacity="0.08" stroke="#10B981" stroke-opacity="0.4"/>
+        <rect width="5" height="80" rx="2" fill="#10B981"/>
+        <text x="26" y="34" font-size="18" font-weight="500" fill="#ffffff">Marco Verdi</text>
+        <text x="26" y="58" font-size="14" fill="#ffffff" fill-opacity="0.6">Taglio Uomo</text>
+        <text x="1090" y="34" font-size="20" font-weight="700" text-anchor="end" font-family="ui-monospace, monospace" fill="#10B981">11:30</text>
+        <rect x="880" y="46" width="200" height="22" rx="11" fill="#10B981" fill-opacity="0.15"/>
+        <text x="980" y="61" font-size="11" font-weight="600" text-anchor="middle" fill="#10B981">Aggiornato da Galatea</text>
+      </g>
+    </g>
+
+    <!-- next rows preview -->
+    <g transform="translate(40 380)" font-family="Inter, sans-serif" opacity="0.75">
+      <g>
+        <rect width="1120" height="64" rx="12" fill="#ffffff" fill-opacity="0.025" stroke="#ffffff" stroke-opacity="0.05"/>
+        <text x="26" y="28" font-size="14" fill="#ffffff">Elena F.</text>
+        <text x="26" y="48" font-size="12" fill="#ffffff" fill-opacity="0.5">Consulenza Extension</text>
+        <text x="1090" y="28" font-size="12" text-anchor="end" font-family="ui-monospace, monospace" fill="#ffffff" fill-opacity="0.4">14:00</text>
+      </g>
+      <g transform="translate(0 80)">
+        <rect width="1120" height="64" rx="12" fill="#ffffff" fill-opacity="0.025" stroke="#ffffff" stroke-opacity="0.05"/>
+        <text x="26" y="28" font-size="14" fill="#ffffff">Chiara R.</text>
+        <text x="26" y="48" font-size="12" fill="#ffffff" fill-opacity="0.5">Colore</text>
+        <text x="1090" y="28" font-size="12" text-anchor="end" font-family="ui-monospace, monospace" fill="#ffffff" fill-opacity="0.4">16:30</text>
+      </g>
+      <g transform="translate(0 160)">
+        <rect width="1120" height="64" rx="12" fill="#ffffff" fill-opacity="0.025" stroke="#ffffff" stroke-opacity="0.05"/>
+        <text x="26" y="28" font-size="14" fill="#ffffff">Sofia M.</text>
+        <text x="26" y="48" font-size="12" fill="#ffffff" fill-opacity="0.5">Piega + Trattamento</text>
+        <text x="1090" y="28" font-size="12" text-anchor="end" font-family="ui-monospace, monospace" fill="#ffffff" fill-opacity="0.4">17:45</text>
+      </g>
+    </g>
+  </g>
+
+  <g transform="translate(160 960)" font-family="Inter, sans-serif">
+    <text font-size="32" font-weight="600" fill="#ffffff">L'agenda si aggiorna da sola.</text>
+    <text y="40" font-size="18" fill="#ffffff" fill-opacity="0.55">Tu continui a tagliare.</text>
+  </g>
+</svg>

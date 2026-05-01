@@ -1,0 +1,150 @@
+@import "tailwindcss";
+@plugin "tailwindcss-animate";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* Default to Dark Mode since it's a dark-dominant premium brand */
+  --background: #030303;
+  --foreground: #F8F8F8;
+
+  --card: #0A0A0A;
+  --card-foreground: #F8F8F8;
+
+  --popover: #0A0A0A;
+  --popover-foreground: #F8F8F8;
+
+  --primary: #FFFFFF;
+  --primary-foreground: #000000;
+
+  --secondary: #121212;
+  --secondary-foreground: #E0E0E0;
+
+  --muted: #1A1A1A;
+  /* Slightly brightened for better readibility on dark backgrounds */
+  --muted-foreground: #B5B5BE;
+
+  --accent: #222222;
+  --accent-foreground: #FFFFFF;
+
+  --destructive: #7F1D1D;
+  --destructive-foreground: #F8F8F8;
+
+  --border: #222222;
+  --input: #121212;
+  --ring: #404040;
+
+  --radius: 0.5rem;
+
+  /* ── Product Accent Colors ─────────────────────────────────────
+     Used sparingly: badges, icon tints, border highlights, KPIs.
+     Never as backgrounds. Never dominant. Always restrained.
+  ── */
+  --galatea: #10B981;    /* emerald – beauty / wellness */
+  --cricchetto: #F97316; /* orange  – workshop operations */
+  --atlas:   #6366F1;    /* indigo  – digital / conversion */
+  --igea:    #22D3EE;    /* cyan    – operational visibility */
+  --hermes:  #F59E0B;    /* amber   – lead intake */
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+}
+
+@layer utilities {
+  .glass-panel {
+    @apply bg-[#030303]/70 backdrop-blur-xl border-b border-white/5;
+  }
+
+  /* Navbar: more opaque than glass-panel to keep legibility on scroll */
+  .glass-nav {
+    @apply bg-[#030303]/85 backdrop-blur-xl border-b border-white/5;
+  }
+  
+  .glass-card {
+    @apply bg-[#0A0A0A]/80 backdrop-blur-md border border-white/5 shadow-[0_4px_24px_-4px_rgba(0,0,0,0.5)] transition-all duration-500 ease-out;
+  }
+  
+  .glass-card:hover {
+    @apply border-white/10 shadow-[0_8px_32px_-8px_rgba(255,255,255,0.05)];
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-b from-white to-white/50;
+  }
+  
+  .text-gradient-subtle {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-muted-foreground to-foreground/70;
+  }
+
+  .button-premium {
+    @apply relative overflow-hidden bg-primary text-primary-foreground font-medium transition-all duration-300 hover:scale-[1.02] active:scale-[0.98];
+  }
+  
+  .button-premium::after {
+    @apply content-[''] absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full;
+  }
+  
+  .button-premium:hover::after {
+    @apply transition-transform duration-700 translate-x-[200%];
+  }
+
+  .button-outline {
+    @apply border border-border bg-transparent text-foreground hover:bg-white/5 hover:border-white/10 transition-all duration-300;
+  }
+}
+
+html, body {
+  @apply bg-background text-foreground;
+  scroll-behavior: smooth;
+}
+
+html {
+  /* Prevent sections from hiding behind the navbar */
+  scroll-padding-top: 100px;
+}
+
+::selection {
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+}

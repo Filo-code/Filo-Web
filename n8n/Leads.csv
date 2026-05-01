@@ -1,0 +1,3 @@
+lead_id,created_at,nome,attivita,settore,email,telefono,citta,prodotto_interesse,messaggio,privacy_consent,source,status,owner_notified,customer_email_sent,customer_email_sent_at,note
+lead_1745150400000_a1b2c3d4,2026-04-20T10:00:00.000Z,Mario Rossi,Acme Srl,Estetica,mario.rossi@example.com,+39 333 1234567,Milano,galatea,Vorrei una demo di Galatea per il mio salone,Yes,website,new,false,false,,
+lead_1746000000000_b2c3d4e5,2026-04-30T14:00:00.000Z,Test Cricchetto,Officina Test,Officina,test@example.com,+39 333 1234567,Milano,cricchetto,Vorrei informazioni su Cricchetto per gestire lavorazioni targhe e aggiornare stati degli interventi via dashboard web e WhatsApp.,Yes,website,new,false,false,,

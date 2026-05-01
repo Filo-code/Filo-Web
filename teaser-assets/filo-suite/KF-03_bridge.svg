@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <defs>
+    <linearGradient id="line" x1="0" x2="1">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#ffffff" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect width="1920" height="1080" fill="#030303"/>
+  <rect x="0" y="500" width="1920" height="1.5" fill="url(#line)"/>
+  <g fill="#ffffff">
+    <circle cx="780" cy="560" r="6" fill-opacity="0.9"/>
+    <circle cx="900" cy="560" r="6" fill-opacity="0.9"/>
+    <circle cx="1020" cy="560" r="6" fill-opacity="0.9"/>
+    <circle cx="1140" cy="560" r="6" fill-opacity="0.9"/>
+  </g>
+  <text x="960" y="625" font-family="Inter, system-ui, sans-serif" font-weight="500" font-size="18" fill="#ffffff" fill-opacity="0.40" text-anchor="middle" letter-spacing="0.2em">
+    QUATTRO SISTEMI. UN&#39;UNICA INTELLIGENZA.
+  </text>
+</svg>

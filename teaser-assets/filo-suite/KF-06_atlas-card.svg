@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <defs>
+    <radialGradient id="aGlow" cx="90%" cy="10%" r="45%">
+      <stop offset="0%" stop-color="#6366F1" stop-opacity="0.2"/>
+      <stop offset="100%" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="funnel" x1="0" x2="1">
+      <stop offset="0%" stop-color="#6366F1" stop-opacity="0.45"/>
+      <stop offset="100%" stop-color="#6366F1" stop-opacity="0.15"/>
+    </linearGradient>
+    <linearGradient id="thinLine" x1="0" x2="1">
+      <stop offset="0%" stop-color="#6366F1" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#6366F1" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#6366F1" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect width="1920" height="1080" fill="#030303"/>
+
+  <g transform="translate(420 200)">
+    <rect width="1080" height="620" rx="20" fill="#0A0A0A" stroke="#ffffff" stroke-opacity="0.05"/>
+    <rect width="1080" height="620" rx="20" fill="url(#aGlow)"/>
+
+    <g transform="translate(36 34)" font-family="Inter, sans-serif">
+      <text font-size="20" font-weight="600" fill="#ffffff" y="24">Atlas</text>
+      <g transform="translate(100 4)">
+        <rect width="120" height="26" rx="13" fill="#6366F1" fill-opacity="0.08" stroke="#6366F1" stroke-opacity="0.3"/>
+        <circle cx="14" cy="13" r="3.5" fill="#6366F1"/>
+        <text x="26" y="18" font-size="12" font-weight="600" fill="#6366F1">Disponibile</text>
+      </g>
+      <text y="52" font-size="11" fill="#ffffff" fill-opacity="0.4" letter-spacing="0.2em">PRESENZA DIGITALE · LEAD GENERATION</text>
+    </g>
+
+    <!-- Funnel bars -->
+    <g transform="translate(60 160)" font-family="Inter, sans-serif">
+      <g>
+        <text font-size="11" fill="#ffffff" fill-opacity="0.5" letter-spacing="0.15em" y="0">AWARENESS</text>
+        <rect y="14" width="880" height="28" rx="6" fill="url(#funnel)"/>
+        <text x="860" y="33" font-size="12" text-anchor="end" fill="#ffffff" fill-opacity="0.7">12.4k</text>
+      </g>
+      <g transform="translate(0 80)">
+        <text font-size="11" fill="#ffffff" fill-opacity="0.5" letter-spacing="0.15em" y="0">CONSIDERATION</text>
+        <rect y="14" width="620" height="28" rx="6" fill="url(#funnel)"/>
+        <text x="600" y="33" font-size="12" text-anchor="end" fill="#ffffff" fill-opacity="0.7">3.870</text>
+      </g>
+      <g transform="translate(0 160)">
+        <text font-size="11" fill="#ffffff" fill-opacity="0.5" letter-spacing="0.15em" y="0">CONVERSION</text>
+        <rect y="14" width="360" height="28" rx="6" fill="url(#funnel)"/>
+        <text x="340" y="33" font-size="12" text-anchor="end" fill="#ffffff" fill-opacity="0.7">412</text>
+      </g>
+      <rect y="240" width="880" height="2" fill="url(#thinLine)"/>
+      <text y="280" font-size="12" fill="#ffffff" fill-opacity="0.45">Landing strategica → funnel → CRM aziendale</text>
+    </g>
+
+    <!-- KPI summary tile -->
+    <g transform="translate(780 430)">
+      <rect width="240" height="130" rx="14" fill="#6366F1" fill-opacity="0.05" stroke="#6366F1" stroke-opacity="0.2"/>
+      <text x="20" y="30" font-family="Inter, sans-serif" font-size="11" fill="#6366F1" fill-opacity="0.7" letter-spacing="0.2em">CONVERSIONE</text>
+      <text x="20" y="70" font-family="Inter, sans-serif" font-size="36" font-weight="700" fill="#ffffff">3.3%</text>
+      <text x="20" y="100" font-family="Inter, sans-serif" font-size="11" fill="#ffffff" fill-opacity="0.5">Media pagine statiche: 1.1%</text>
+    </g>
+  </g>
+
+  <g transform="translate(160 880)" font-family="Inter, sans-serif">
+    <text font-size="64" font-weight="700" fill="#ffffff" letter-spacing="-0.02em">Atlas</text>
+    <text y="60" font-size="22" fill="#ffffff" fill-opacity="0.6">Presenza digitale che converte.</text>
+  </g>
+</svg>

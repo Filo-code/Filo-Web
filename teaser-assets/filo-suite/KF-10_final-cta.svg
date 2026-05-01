@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <defs>
+    <radialGradient id="fGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.06"/>
+      <stop offset="100%" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="btnGrad" x1="0" x2="1">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.85"/>
+    </linearGradient>
+  </defs>
+  <rect width="1920" height="1080" fill="#030303"/>
+  <rect width="1920" height="1080" fill="url(#fGlow)"/>
+
+  <g transform="translate(960 420)" text-anchor="middle" font-family="Inter, sans-serif">
+    <text font-size="160" font-weight="700" fill="#ffffff" letter-spacing="-0.04em">Filò</text>
+    <text y="60" font-size="18" fill="#ffffff" fill-opacity="0.5" letter-spacing="0.3em">L'ECOSISTEMA CHE FA CRESCERE IL TUO BUSINESS</text>
+  </g>
+
+  <!-- CTA pill -->
+  <g transform="translate(720 640)">
+    <rect width="480" height="72" rx="36" fill="url(#btnGrad)"/>
+    <text x="240" y="46" font-family="Inter, sans-serif" font-size="18" font-weight="600" fill="#030303" text-anchor="middle" letter-spacing="0.02em">Parla con Filò →</text>
+  </g>
+
+  <g transform="translate(960 780)" text-anchor="middle" font-family="Inter, sans-serif">
+    <text font-size="16" fill="#ffffff" fill-opacity="0.55">filo.it</text>
+  </g>
+
+  <!-- bottom accent dots (4 products) -->
+  <g transform="translate(880 900)">
+    <circle cx="0" cy="0" r="5" fill="#10B981"/>
+    <circle cx="50" cy="0" r="5" fill="#6366F1"/>
+    <circle cx="100" cy="0" r="5" fill="#22D3EE" fill-opacity="0.5"/>
+    <circle cx="150" cy="0" r="5" fill="#F59E0B" fill-opacity="0.5"/>
+  </g>
+</svg>

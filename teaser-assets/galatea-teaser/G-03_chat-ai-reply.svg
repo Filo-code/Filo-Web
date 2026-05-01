@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <defs>
+    <linearGradient id="phone" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#111"/>
+      <stop offset="100%" stop-color="#0A0A0A"/>
+    </linearGradient>
+  </defs>
+  <rect width="1920" height="1080" fill="#030303"/>
+
+  <g transform="translate(660 80)">
+    <rect width="600" height="920" rx="56" fill="url(#phone)" stroke="#ffffff" stroke-opacity="0.08" stroke-width="2"/>
+    <rect x="16" y="16" width="568" height="888" rx="44" fill="#0B141A"/>
+    <rect x="16" y="16" width="568" height="90" rx="44" fill="#075E54"/>
+    <rect x="16" y="60" width="568" height="46" fill="#075E54"/>
+    <circle cx="80" cy="60" r="22" fill="#25D366"/>
+    <text x="82" y="66" font-family="Inter, sans-serif" font-size="18" font-weight="700" fill="#ffffff" text-anchor="middle">M</text>
+    <text x="120" y="54" font-family="Inter, sans-serif" font-size="18" font-weight="600" fill="#ffffff">Marco Verdi</text>
+    <text x="120" y="76" font-family="Inter, sans-serif" font-size="12" fill="#10B981">Galatea sta rispondendo…</text>
+
+    <!-- Incoming -->
+    <g transform="translate(50 150)">
+      <rect width="460" height="100" rx="14" fill="#202C33"/>
+      <text x="20" y="32" font-family="Inter, sans-serif" font-size="16" fill="#ffffff">Riesco a spostare l'appuntamento</text>
+      <text x="20" y="54" font-family="Inter, sans-serif" font-size="16" fill="#ffffff">delle 11:15 di 15 minuti?</text>
+      <text x="440" y="84" font-family="Inter, sans-serif" font-size="11" text-anchor="end" fill="#ffffff" fill-opacity="0.5">11:02</text>
+    </g>
+
+    <!-- Outgoing AI bubble -->
+    <g transform="translate(110 280)">
+      <rect width="460" height="150" rx="14" fill="#005C4B"/>
+      <text x="20" y="34" font-family="Inter, sans-serif" font-size="16" fill="#ffffff">Ciao Marco, nessun problema —</text>
+      <text x="20" y="56" font-family="Inter, sans-serif" font-size="16" fill="#ffffff">spostiamo il Taglio Uomo alle</text>
+      <text x="20" y="78" font-family="Inter, sans-serif" font-size="16" font-weight="700" fill="#ffffff">11:30</text>
+      <text x="20" y="110" font-family="Inter, sans-serif" font-size="14" fill="#ffffff" fill-opacity="0.8">Ti aspettiamo. A dopo! ✂️</text>
+      <text x="420" y="134" font-family="Inter, sans-serif" font-size="11" text-anchor="end" fill="#ffffff" fill-opacity="0.6">11:02 ✓✓</text>
+    </g>
+
+    <!-- AI badge under bubble -->
+    <g transform="translate(110 450)">
+      <rect width="180" height="28" rx="14" fill="#10B981" fill-opacity="0.15" stroke="#10B981" stroke-opacity="0.4"/>
+      <circle cx="16" cy="14" r="4" fill="#10B981"/>
+      <text x="30" y="19" font-family="Inter, sans-serif" font-size="12" font-weight="600" fill="#10B981">Gestito da Galatea</text>
+    </g>
+  </g>
+
+  <g transform="translate(160 940)" font-family="Inter, sans-serif">
+    <text font-size="32" font-weight="600" fill="#ffffff">Galatea risponde in 3 secondi.</text>
+    <text y="44" font-size="18" fill="#ffffff" fill-opacity="0.55">Con il tuo tono. Con le tue regole.</text>
+  </g>
+</svg>

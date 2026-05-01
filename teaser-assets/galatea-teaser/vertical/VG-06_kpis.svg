@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1920" width="1080" height="1920">
+  <defs>
+    <radialGradient id="gGlow" cx="50%" cy="20%" r="70%">
+      <stop offset="0%" stop-color="#10B981" stop-opacity="0.15"/>
+      <stop offset="100%" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1080" height="1920" fill="#030303"/>
+  <rect width="1080" height="1920" fill="url(#gGlow)"/>
+
+  <g transform="translate(60 140)" font-family="Inter, sans-serif">
+    <text font-size="20" fill="#10B981" letter-spacing="0.3em">IMPATTO · QUESTO MESE</text>
+    <text y="70" font-size="48" font-weight="700" fill="#ffffff">Risultati reali.</text>
+    <text y="120" font-size="48" font-weight="700" fill="#ffffff" fill-opacity="0.6">Non promesse.</text>
+  </g>
+
+  <g transform="translate(60 380)" font-family="Inter, sans-serif">
+    <!-- KPI 1 -->
+    <g>
+      <rect width="960" height="300" rx="24" fill="#10B981" fill-opacity="0.06" stroke="#10B981" stroke-opacity="0.25"/>
+      <text x="40" y="60" font-size="16" fill="#10B981" fill-opacity="0.8" letter-spacing="0.25em">PRENOTAZIONI AI</text>
+      <text x="40" y="200" font-size="180" font-weight="700" fill="#ffffff">128</text>
+      <text x="40" y="250" font-size="22" fill="#10B981">+14% vs mese scorso</text>
+      <text x="40" y="280" font-size="18" fill="#ffffff" fill-opacity="0.5">Gestite senza intervento umano</text>
+    </g>
+
+    <!-- KPI 2 -->
+    <g transform="translate(0 340)">
+      <rect width="960" height="300" rx="24" fill="#10B981" fill-opacity="0.06" stroke="#10B981" stroke-opacity="0.25"/>
+      <text x="40" y="60" font-size="16" fill="#10B981" fill-opacity="0.8" letter-spacing="0.25em">ORE SALVATE</text>
+      <text x="40" y="200" font-size="180" font-weight="700" fill="#ffffff">42<tspan font-size="90" fill-opacity="0.5">h</tspan></text>
+      <text x="40" y="250" font-size="22" fill="#10B981">≈ 5 giorni di lavoro</text>
+      <text x="40" y="280" font-size="18" fill="#ffffff" fill-opacity="0.5">Al telefono e in chat</text>
+    </g>
+
+    <!-- KPI 3 impact -->
+    <g transform="translate(0 680)">
+      <rect width="960" height="300" rx="24" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.12"/>
+      <text x="40" y="60" font-size="16" fill="#ffffff" fill-opacity="0.6" letter-spacing="0.25em">IMPATTO STIMATO</text>
+      <text x="40" y="210" font-size="140" font-weight="700" fill="#ffffff">€3.840</text>
+      <text x="40" y="260" font-size="22" fill="#ffffff" fill-opacity="0.7">Fatturato recuperato</text>
+    </g>
+  </g>
+
+  <g transform="translate(60 1740)" font-family="Inter, sans-serif">
+    <text font-size="26" fill="#ffffff" fill-opacity="0.5" letter-spacing="0.25em">GALATEA · FILO.IT</text>
+  </g>
+</svg>
