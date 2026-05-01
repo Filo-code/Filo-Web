@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import { Inter } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import { PageViewTracker } from "@/components/analytics/PageViewTracker";
 import { CookieBanner } from "@/components/layout/CookieBanner";
 import "./globals.css";
@@ -84,6 +85,7 @@ export default function RootLayout({
           <PageViewTracker />
         </Suspense>
         <CookieBanner />
+        <Analytics />
       </body>
     </html>
   );
