@@ -99,14 +99,15 @@ export function AtlasDashboard() {
               {ATLAS_FUNNEL.map((step, idx) => (
                 <motion.div
                   key={idx}
-                  initial={{ width: 0 }}
-                  animate={{ width: step.w }}
+                  initial={{ scaleX: 0, opacity: 0 }}
+                  whileInView={{ scaleX: 1, opacity: 1 }}
+                  viewport={{ once: true }}
                   transition={{ duration: 1.2, delay: idx * 0.2, ease: "easeOut" }}
                   className={cn(
                     "h-12 rounded-r-lg flex items-center justify-between px-4 border-y border-r border-white/5",
                     step.bold ? "font-semibold" : ""
                   )}
-                  style={{ background: step.bg }}
+                  style={{ background: step.bg, width: step.w, transformOrigin: "left" }}
                 >
                   <span className="text-sm text-white/85">{step.stage}</span>
                   <div className="flex items-center gap-4">

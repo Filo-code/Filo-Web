@@ -181,7 +181,8 @@ export function ProductBlock({
                 <motion.li
                   key={`${name}-base-${i}`}
                   initial={{ opacity: 0, y: 5 }}
-                  animate={{ opacity: 1, y: 0 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
                   transition={{ delay: i * 0.04 + 0.1 }}
                   className="flex items-start group/f"
                 >
@@ -305,7 +306,8 @@ export function ProductBlock({
                 <motion.div
                   key={`${name}-pro-${i}`}
                   initial={{ opacity: 0, y: 4 }}
-                  animate={{ opacity: 1, y: 0 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
                   transition={{ delay: i * 0.04 + 0.05 }}
                   className="flex items-start gap-3 px-4 py-3 rounded-lg border"
                   style={{
@@ -414,7 +416,8 @@ export function ProductBlock({
                 <motion.li
                   key={`${name}-cs-${i}`}
                   initial={{ opacity: 0, y: 5 }}
-                  animate={{ opacity: 1, y: 0 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
                   transition={{ delay: i * 0.04 + 0.1 }}
                   className="flex items-start"
                 >

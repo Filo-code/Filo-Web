@@ -1,6 +1,3 @@
-"use client";
-
-import { motion } from "framer-motion";
 import { MessageCircle, Bot, Calendar, Database, Workflow, Cloud, Send } from "lucide-react";
 
 const integrations = [
@@ -23,21 +20,15 @@ export function Integrations() {
           Infrastruttura tecnologica e connessioni native
        </h2>
 
-       {/* Infinite Marquee Container */}
-       <div className="flex w-[200%] md:w-full overflow-hidden">
-         <motion.div 
-           initial={{ x: "0%" }}
-           animate={{ x: "-50%" }}
-           transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-           className="flex items-center gap-16 md:gap-32 pr-16 md:pr-32 whitespace-nowrap"
-         >
-           {[...integrations, ...integrations, ...integrations].map((item, i) => (
-              <div key={i} className="flex items-center gap-3 opacity-30 hover:opacity-100 transition-opacity duration-500 grayscale hover:grayscale-0">
+       <div className="overflow-hidden w-full">
+         <div className="flex items-center gap-16 md:gap-32 pr-16 md:pr-32 whitespace-nowrap animate-marquee">
+           {[...integrations, ...integrations].map((item, i) => (
+              <div key={i} className="flex items-center gap-3 opacity-30 hover:opacity-100 transition-opacity duration-500 grayscale hover:grayscale-0 shrink-0">
                  <item.icon className="w-5 h-5 text-white" />
                  <span className="text-sm font-medium text-white/90">{item.name}</span>
               </div>
            ))}
-         </motion.div>
+         </div>
        </div>
     </section>
   );
