@@ -36,6 +36,46 @@ const PRODUCT_ACCENT: Record<string, { color: string; rgb: string; glowClass: st
   hermes:     { color: "#F59E0B", rgb: "245,158,11",  glowClass: "bg-amber-500",   statusBadge: "Non ancora disponibile" },
 };
 
+const MOBILE_SUMMARY: Record<string, string[]> = {
+  galatea:    ["Chat AI per richieste in ingresso", "Appuntamenti gestiti e confermati automaticamente", "Metriche: ore salvate e no-show ridotti"],
+  cricchetto: ["Schede veicolo attive in officina", "Stato interventi e ricambi in tempo reale", "Comandi operativi via WhatsApp"],
+  atlas:      ["Workflow e task operativi automatizzati", "Integrazioni e sincronizzazioni CRM", "Reminder e passaggi tra reparti"],
+  igea:       ["Richieste studio raccolte e organizzate", "Appuntamenti e follow-up gestiti", "Pannello operativo in sviluppo"],
+  hermes:     ["Lead in ingresso raccolti e ordinati", "Primo contatto automatico attivato", "Routing e notifiche al team"],
+};
+
+function MobileDashboardSummary({
+  type,
+  accent,
+}: {
+  type: string;
+  accent: { color: string; rgb: string };
+}) {
+  const items = MOBILE_SUMMARY[type] ?? [];
+  return (
+    <div
+      className="rounded-xl border p-5 flex flex-col gap-4"
+      style={{ borderColor: `rgba(${accent.rgb}, 0.15)`, background: `rgba(${accent.rgb}, 0.03)` }}
+    >
+      <div className="flex items-center gap-2">
+        <span className="w-1.5 h-1.5 rounded-full" style={{ background: accent.color }} />
+        <span className="text-[10px] font-mono uppercase tracking-[0.15em] text-white/40">
+          Dashboard Pro · Anteprima
+        </span>
+      </div>
+      <div className="flex flex-col gap-3">
+        {items.map((item, i) => (
+          <div key={i} className="flex items-start gap-3">
+            <div className="mt-1.5 w-1 h-1 rounded-full shrink-0" style={{ background: `rgba(${accent.rgb}, 0.5)` }} />
+            <span className="text-sm text-white/60 leading-relaxed">{item}</span>
+          </div>
+        ))}
+      </div>
+      <p className="text-[11px] text-white/25 font-mono">Visualizza la dashboard completa da desktop</p>
+    </div>
+  );
+}
+
 export function ProductBlock({
   name, description, target, mainBenefit,
   metaChips,
@@ -46,10 +86,16 @@ export function ProductBlock({
   id,
 }: ProductBlockProps) {
   const [activeTab, setActiveTab] = useState<"base" | "pro">("base");
+  const [isDesktop, setIsDesktop] = useState(false);
   const isActive = status === "active";
   const accent = PRODUCT_ACCENT[type];
 
-  const handleTabChange = (tab: "base" | "pro") => setActiveTab(tab);
+  const handleTabChange = (tab: "base" | "pro") => {
+    setActiveTab(tab);
+    if (tab === "pro" && typeof window !== "undefined") {
+      setIsDesktop(window.matchMedia("(min-width: 768px)").matches);
+    }
+  };
   const scrollToContact = (label: string) => {
     trackEvent("product_cta_click", {
       location: "product_block",
@@ -384,19 +430,26 @@ export function ProductBlock({
               </div>
             </div>
 
-            {/* Dashboard container — large, immersive */}
-            <div
-              className={cn(
-                "w-full rounded-xl overflow-hidden border relative z-10",
-                type === "galatea" || type === "atlas" ? "h-[650px] md:h-[720px]" : type === "cricchetto" ? "h-[620px] md:h-[840px]" : "h-[500px] md:h-[580px]"
-              )}
-              style={{
-                borderColor: `rgba(${accent.rgb}, 0.15)`,
-                boxShadow: `0 0 60px -20px rgba(${accent.rgb}, 0.12), 0 32px 80px -20px rgba(0,0,0,0.6)`,
-              }}
-            >
-              <DashboardPreview productType={type} />
+            {/* Mobile: static summary (no dashboard JS loaded) */}
+            <div className="md:hidden">
+              <MobileDashboardSummary type={type} accent={accent} />
             </div>
+
+            {/* Desktop: full immersive dashboard (only mounts when confirmed desktop) */}
+            {isDesktop && (
+              <div
+                className={cn(
+                  "hidden md:block w-full rounded-xl overflow-hidden border relative z-10",
+                  type === "galatea" || type === "atlas" ? "md:h-[720px]" : type === "cricchetto" ? "md:h-[840px]" : "md:h-[580px]"
+                )}
+                style={{
+                  borderColor: `rgba(${accent.rgb}, 0.15)`,
+                  boxShadow: `0 0 60px -20px rgba(${accent.rgb}, 0.12), 0 32px 80px -20px rgba(0,0,0,0.6)`,
+                }}
+              >
+                <DashboardPreview productType={type} />
+              </div>
+            )}
           </div>
         </div>
       )}
