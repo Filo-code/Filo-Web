@@ -9,17 +9,31 @@ import { ProductBlock } from "@/components/products/ProductBlock";
 
 const structuredData = {
   "@context": "https://schema.org",
-  "@type": "Organization",
-  name: "Filò",
-  url: "https://filo-ai.it",
-  description:
-    "Soluzioni AI per appuntamenti, lead intake, dashboard operative e automazioni di processo, con Piano Base e Piano Pro.",
-  makesOffer: [
-    { "@type": "Offer", itemOffered: { "@type": "Service", name: "Galatea", description: "Segretaria AI per saloni e attività beauty: richieste, appuntamenti, conferme, promemoria e follow-up." } },
-    { "@type": "Offer", itemOffered: { "@type": "Service", name: "Cricchetto", description: "Sistema operativo per officine: dashboard web, gestione targa-prima e comandi operativi anche da WhatsApp per aggiornare lavorazioni, note, ricambi, manodopera e stato degli interventi." } },
-    { "@type": "Offer", itemOffered: { "@type": "Service", name: "Atlas", description: "Automazioni operative per workflow, integrazioni, task ripetitivi, processi interni e routing." } },
-    { "@type": "Offer", itemOffered: { "@type": "Service", name: "Igea", description: "Assistente AI in arrivo per studi e professionisti: richieste, appuntamenti, organizzazione clienti e promemoria." } },
-    { "@type": "Offer", itemOffered: { "@type": "Service", name: "Hermes", description: "Sistema non ancora disponibile per lead intake, primo contatto, qualificazione, smistamento e notifiche." } },
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://filo-ai.it/#organization",
+      name: "Filò",
+      url: "https://filo-ai.it",
+      email: "info@filo-ai.it",
+      description:
+        "Soluzioni AI per appuntamenti, lead intake, dashboard operative e automazioni di processo, con Piano Base e Piano Pro.",
+      makesOffer: [
+        { "@type": "Offer", itemOffered: { "@type": "Service", name: "Galatea", url: "https://filo-ai.it/prodotti/galatea", description: "Segretaria AI per saloni e attività beauty: richieste, appuntamenti, conferme, promemoria e follow-up." } },
+        { "@type": "Offer", itemOffered: { "@type": "Service", name: "Cricchetto", url: "https://filo-ai.it/prodotti/cricchetto", description: "Sistema operativo per officine: dashboard web, gestione targa-prima e comandi operativi anche da WhatsApp per aggiornare lavorazioni, note, ricambi, manodopera e stato degli interventi." } },
+        { "@type": "Offer", itemOffered: { "@type": "Service", name: "Atlas", url: "https://filo-ai.it/prodotti/atlas", description: "Automazioni operative per workflow, integrazioni, task ripetitivi, processi interni e routing." } },
+        { "@type": "Offer", itemOffered: { "@type": "Service", name: "Igea", description: "Assistente AI in arrivo per studi e professionisti: richieste, appuntamenti, organizzazione clienti e promemoria." } },
+        { "@type": "Offer", itemOffered: { "@type": "Service", name: "Hermes", description: "Sistema non ancora disponibile per lead intake, primo contatto, qualificazione, smistamento e notifiche." } },
+      ],
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://filo-ai.it/#website",
+      url: "https://filo-ai.it",
+      name: "Filò",
+      publisher: { "@id": "https://filo-ai.it/#organization" },
+      inLanguage: "it-IT",
+    },
   ],
 };
 
