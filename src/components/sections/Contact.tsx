@@ -40,6 +40,24 @@ export function Contact() {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
   const [productInterest, setProductInterest] = useState("");
   const hasTrackedFormStart = useRef(false);
+  const hasTrackedFormView = useRef(false);
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !hasTrackedFormView.current) {
+          hasTrackedFormView.current = true;
+          trackEvent("contact_form_view", { location: "contact_section", route: window.location.pathname });
+        }
+      },
+      { threshold: 0.2 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     const handlePreselect = (e: Event) => {
@@ -68,6 +86,12 @@ export function Contact() {
 
     const formData = new FormData(e.currentTarget);
     const data = Object.fromEntries(formData.entries());
+
+    trackEvent("contact_form_submit_attempt", {
+      location: "contact_form",
+      product: typeof data.interest === "string" ? data.interest : "unknown",
+      route: window.location.pathname,
+    });
 
     try {
       await submitFormToWebhook(data);
@@ -108,9 +132,9 @@ export function Contact() {
   ];
 
   return (
-    <section id="contact" className="py-40 relative border-t border-white/5 bg-[#030303] overflow-hidden">
-      {/* Decorative background elements */}
-      <div className="absolute top-0 right-1/4 w-[800px] h-[800px] bg-white/[0.01] rounded-full blur-[120px] pointer-events-none" />
+    <section id="contact" ref={sectionRef} className="py-40 relative border-t border-white/5 bg-[#030303] overflow-hidden">
+      {/* Decorative background glow — hidden on mobile to reduce GPU compositing cost */}
+      <div className="hidden md:block absolute top-0 right-1/4 w-[800px] h-[800px] bg-white/[0.01] rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 
       <motion.div

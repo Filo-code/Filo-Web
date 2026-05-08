@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/Button";
 import Link from "next/link";
 import { defaultConsent, hasSavedConsent, saveConsentState } from "@/lib/consent";
+import { trackEvent } from "@/lib/analytics";
 
 export function CookieBanner() {
   const [isVisible, setIsVisible] = useState(false);
@@ -50,7 +51,7 @@ export function CookieBanner() {
                 privacy-first per misurare pageview e interazioni senza inviare dati personali. I tag
                 marketing, come GA4 advertising o Meta Pixel, restano disattivati finché non ci sarà
                 un consenso dedicato. Dettagli nella{" "}
-                <Link href="/privacy" className="text-white/80 underline hover:text-white transition-colors">Privacy Policy</Link>.
+                <Link href="/privacy" onClick={() => trackEvent("privacy_click", { location: "cookie_banner", route: window.location.pathname })} className="text-white/80 underline hover:text-white transition-colors">Privacy Policy</Link>.
               </p>
             </div>
 

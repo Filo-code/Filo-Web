@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run *)",
+      "Bash(python3 *)",
+      "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\Ez__Rekt\\\\Desktop\\\\Filò\\\\Sito Web\" -Force)",
+      "Bash(Select-Object Name, PSIsContainer)"
+    ]
+  }
+}

@@ -4,6 +4,7 @@ import { ArrowRight, Check } from "lucide-react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { TrackedLink } from "@/components/ui/TrackedLink";
 
 export const metadata: Metadata = {
   title: "Galatea — Segretaria AI per saloni e centri estetici",
@@ -105,12 +106,14 @@ export default function GalateaPage() {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4">
-              <Link
+              <TrackedLink
                 href="/#contact"
+                eventName="product_page_cta_click"
+                eventProps={{ product: "galatea", location: "product_hero" }}
                 className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-white text-black text-sm font-semibold hover:bg-white/90 transition-colors"
               >
                 Richiedi una demo <ArrowRight className="w-4 h-4" />
-              </Link>
+              </TrackedLink>
               <Link
                 href="/#products"
                 className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg border border-white/10 text-white/80 text-sm font-medium hover:bg-white/5 hover:text-white transition-colors"
@@ -232,12 +235,14 @@ export default function GalateaPage() {
 
           {/* Bottom CTA */}
           <div className="mt-20 pt-12 border-t border-white/5 flex flex-col sm:flex-row gap-4">
-            <Link
+            <TrackedLink
               href="/#contact"
+              eventName="product_page_cta_click"
+              eventProps={{ product: "galatea", location: "product_bottom" }}
               className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-white text-black text-sm font-semibold hover:bg-white/90 transition-colors"
             >
               Richiedi una demo di Galatea <ArrowRight className="w-4 h-4" />
-            </Link>
+            </TrackedLink>
             <Link
               href="/"
               className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg border border-white/10 text-white/80 text-sm font-medium hover:bg-white/5 hover:text-white transition-colors"

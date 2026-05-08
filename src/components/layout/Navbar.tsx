@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/Button";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FiloLogoFull } from "@/components/brand/FiloLogo";
-import { trackEvent } from "@/lib/analytics";
+import { trackEvent, type AnalyticsEventName } from "@/lib/analytics";
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = React.useState(false);
@@ -19,17 +19,17 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const navLinks = [
-    { name: "Soluzioni", href: "#products" },
+  interface NavLink { name: string; href: string; event?: AnalyticsEventName; }
+  const navLinks: NavLink[] = [
+    { name: "Soluzioni", href: "#products", event: "nav_products_click" },
     { name: "Come funziona", href: "#how-it-works" },
     { name: "Perché Filò", href: "#why-filo" },
   ];
 
   const scrollToContact = (location: string) => {
-    trackEvent("cta_click", {
+    trackEvent("nav_contact_click", {
       location,
-      label: "book_session",
-      path: window.location.pathname,
+      route: window.location.pathname,
     });
     document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
   };
@@ -51,6 +51,7 @@ export function Navbar() {
             <Link
               key={link.name}
               href={link.href}
+              onClick={link.event ? () => trackEvent(link.event!, { location: "navbar", route: window.location.pathname }) : undefined}
               className="text-sm font-medium text-[#B5B5BE] hover:text-white transition-colors"
             >
               {link.name}
@@ -90,7 +91,10 @@ export function Navbar() {
               <Link
                 key={link.name}
                 href={link.href}
-                onClick={() => setIsMobileMenuOpen(false)}
+                onClick={() => {
+                  if (link.event) trackEvent(link.event, { location: "mobile_navbar", route: window.location.pathname });
+                  setIsMobileMenuOpen(false);
+                }}
                 className="text-base font-medium text-[#B5B5BE] hover:text-white transition-colors"
               >
                 {link.name}

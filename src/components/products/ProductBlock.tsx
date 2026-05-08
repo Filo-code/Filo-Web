@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { Button, buttonClassName } from "@/components/ui/Button";
 import { Check, Bot, Workflow, ArrowRight, Wrench } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { DashboardPreview } from "./DashboardPreview";
 import { EarlyAccessForm } from "./EarlyAccessForm";
@@ -89,6 +89,10 @@ export function ProductBlock({
   const [isDesktop, setIsDesktop] = useState(false);
   const isActive = status === "active";
   const accent = PRODUCT_ACCENT[type];
+
+  useEffect(() => {
+    setIsDesktop(window.matchMedia("(min-width: 1024px)").matches);
+  }, []);
 
   const handleTabChange = (tab: "base" | "pro") => {
     setActiveTab(tab);
@@ -495,20 +499,22 @@ export function ProductBlock({
             />
           </div>
 
-          {/* Right: greyed preview dashboard (larger) */}
-          <div className="hidden lg:flex items-start justify-center">
-            <div
-              className="w-full rounded-xl overflow-hidden transition-all duration-700 border"
-              style={{
-                height: "480px",
-                opacity: 0.28,
-                filter: "grayscale(60%)",
-                borderColor: `rgba(${accent.rgb}, 0.08)`,
-              }}
-            >
-              <DashboardPreview productType={type} />
+          {/* Right: greyed preview dashboard — skip on mobile to avoid loading lazy dashboard chunks */}
+          {isDesktop && (
+            <div className="hidden lg:flex items-start justify-center">
+              <div
+                className="w-full rounded-xl overflow-hidden transition-all duration-700 border"
+                style={{
+                  height: "480px",
+                  opacity: 0.28,
+                  filter: "grayscale(60%)",
+                  borderColor: `rgba(${accent.rgb}, 0.08)`,
+                }}
+              >
+                <DashboardPreview productType={type} />
+              </div>
             </div>
-          </div>
+          )}
         </div>
       )}
     </motion.div>
