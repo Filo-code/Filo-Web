@@ -1,9 +1,8 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { Button, buttonClassName } from "@/components/ui/Button";
 import { Check, Bot, Workflow, ArrowRight, Wrench } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useSyncExternalStore } from "react";
 import { cn } from "@/lib/utils";
 import { DashboardPreview } from "./DashboardPreview";
 import { EarlyAccessForm } from "./EarlyAccessForm";
@@ -43,6 +42,24 @@ const MOBILE_SUMMARY: Record<string, string[]> = {
   igea:       ["Richieste studio raccolte e organizzate", "Appuntamenti e follow-up gestiti", "Pannello operativo in sviluppo"],
   hermes:     ["Lead in ingresso raccolti e ordinati", "Primo contatto automatico attivato", "Routing e notifiche al team"],
 };
+
+function subscribeToMediaQuery(query: string, callback: () => void) {
+  if (typeof window === "undefined") {
+    return () => {};
+  }
+
+  const mediaQuery = window.matchMedia(query);
+  mediaQuery.addEventListener("change", callback);
+  return () => mediaQuery.removeEventListener("change", callback);
+}
+
+function getMediaQuerySnapshot(query: string) {
+  if (typeof window === "undefined") {
+    return false;
+  }
+
+  return window.matchMedia(query).matches;
+}
 
 function MobileDashboardSummary({
   type,
@@ -86,19 +103,51 @@ export function ProductBlock({
   id,
 }: ProductBlockProps) {
   const [activeTab, setActiveTab] = useState<"base" | "pro">("base");
-  const [isDesktop, setIsDesktop] = useState(false);
+  const [shouldLoadComingSoonPreview, setShouldLoadComingSoonPreview] = useState(false);
+  const comingSoonPreviewRef = useRef<HTMLDivElement>(null);
   const isActive = status === "active";
   const accent = PRODUCT_ACCENT[type];
+  const isLargeViewport = useSyncExternalStore(
+    (callback) => subscribeToMediaQuery("(min-width: 1024px)", callback),
+    () => getMediaQuerySnapshot("(min-width: 1024px)"),
+    () => false
+  );
+  const isMediumViewport = useSyncExternalStore(
+    (callback) => subscribeToMediaQuery("(min-width: 768px)", callback),
+    () => getMediaQuerySnapshot("(min-width: 768px)"),
+    () => false
+  );
+  const shouldRenderComingSoonShell = isLargeViewport;
+  const shouldRenderActiveDashboard = isMediumViewport;
+  const shouldRenderComingSoonDashboard =
+    shouldLoadComingSoonPreview || (typeof window !== "undefined" && !("IntersectionObserver" in window));
 
   useEffect(() => {
-    setIsDesktop(window.matchMedia("(min-width: 1024px)").matches);
-  }, []);
+    if (isActive || !shouldRenderComingSoonShell || shouldLoadComingSoonPreview) {
+      return;
+    }
+
+    const previewContainer = comingSoonPreviewRef.current;
+    if (!previewContainer) {
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShouldLoadComingSoonPreview(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "320px 0px" }
+    );
+
+    observer.observe(previewContainer);
+    return () => observer.disconnect();
+  }, [isActive, shouldRenderComingSoonShell, shouldLoadComingSoonPreview]);
 
   const handleTabChange = (tab: "base" | "pro") => {
     setActiveTab(tab);
-    if (tab === "pro" && typeof window !== "undefined") {
-      setIsDesktop(window.matchMedia("(min-width: 768px)").matches);
-    }
   };
   const scrollToContact = (label: string) => {
     trackEvent("product_cta_click", {
@@ -123,12 +172,8 @@ export function ProductBlock({
   };
 
   return (
-    <motion.div
+    <div
       id={id}
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-100px" }}
-      transition={{ duration: 0.8, ease: "easeOut" }}
       className={cn(
         "glass-card p-8 md:p-12 transition-all duration-700 relative overflow-hidden group scroll-mt-24",
         !isActive ? "opacity-95 border-white/5 hover:border-white/10" : "hover:-translate-y-0.5"
@@ -228,12 +273,8 @@ export function ProductBlock({
             </div>
             <ul className="space-y-4 flex-1">
               {baseFeatures.map((feature, i) => (
-                <motion.li
+                <li
                   key={`${name}-base-${i}`}
-                  initial={{ opacity: 0, y: 5 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.04 + 0.1 }}
                   className="flex items-start group/f"
                 >
                   <div
@@ -245,7 +286,7 @@ export function ProductBlock({
                   <span className="text-[#B5B5BE] leading-relaxed group-hover/f:text-white/90 transition-colors text-sm">
                     {feature}
                   </span>
-                </motion.li>
+                </li>
               ))}
             </ul>
             <div className="mt-10 pt-6 border-t border-white/5 flex flex-col sm:flex-row gap-3">
@@ -353,12 +394,8 @@ export function ProductBlock({
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
               {proFeatures.map((feature, i) => (
-                <motion.div
+                <div
                   key={`${name}-pro-${i}`}
-                  initial={{ opacity: 0, y: 4 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.04 + 0.05 }}
                   className="flex items-start gap-3 px-4 py-3 rounded-lg border"
                   style={{
                     background: `rgba(${accent.rgb}, 0.04)`,
@@ -372,7 +409,7 @@ export function ProductBlock({
                     <Check className="w-2.5 h-2.5" style={{ color: accent.color }} />
                   </div>
                   <span className="text-white/75 text-xs leading-relaxed">{feature}</span>
-                </motion.div>
+                </div>
               ))}
             </div>
           </div>
@@ -440,7 +477,7 @@ export function ProductBlock({
             </div>
 
             {/* Desktop: full immersive dashboard (only mounts when confirmed desktop) */}
-            {isDesktop && (
+            {shouldRenderActiveDashboard && (
               <div
                 className={cn(
                   "hidden md:block w-full rounded-xl overflow-hidden border relative z-10",
@@ -470,12 +507,8 @@ export function ProductBlock({
             </div>
             <ul className="space-y-4 mb-10">
               {baseFeatures.map((feature, i) => (
-                <motion.li
+                <li
                   key={`${name}-cs-${i}`}
-                  initial={{ opacity: 0, y: 5 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.04 + 0.1 }}
                   className="flex items-start"
                 >
                   <div
@@ -485,7 +518,7 @@ export function ProductBlock({
                     <Check className="w-3 h-3" style={{ color: `rgba(${accent.rgb.split(",").join(", ")}, 0.7)` }} />
                   </div>
                   <span className="text-white/40 leading-relaxed text-sm">{feature}</span>
-                </motion.li>
+                </li>
               ))}
             </ul>
 
@@ -500,8 +533,8 @@ export function ProductBlock({
           </div>
 
           {/* Right: greyed preview dashboard — skip on mobile to avoid loading lazy dashboard chunks */}
-          {isDesktop && (
-            <div className="hidden lg:flex items-start justify-center">
+          {shouldRenderComingSoonShell && (
+            <div ref={comingSoonPreviewRef} className="hidden lg:flex items-start justify-center">
               <div
                 className="w-full rounded-xl overflow-hidden transition-all duration-700 border"
                 style={{
@@ -511,12 +544,22 @@ export function ProductBlock({
                   borderColor: `rgba(${accent.rgb}, 0.08)`,
                 }}
               >
-                <DashboardPreview productType={type} />
+                {shouldRenderComingSoonDashboard ? (
+                  <DashboardPreview productType={type} />
+                ) : (
+                  <div
+                    aria-hidden="true"
+                    className="h-full w-full"
+                    style={{
+                      background: `linear-gradient(180deg, rgba(${accent.rgb}, 0.06) 0%, rgba(3,3,3,0.88) 100%)`,
+                    }}
+                  />
+                )}
               </div>
             </div>
           )}
         </div>
       )}
-    </motion.div>
+    </div>
   );
 }

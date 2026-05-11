@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { Textarea } from "@/components/ui/Textarea";
@@ -137,13 +136,7 @@ export function Contact() {
       <div className="hidden md:block absolute top-0 right-1/4 w-[800px] h-[800px] bg-white/[0.01] rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
-        className="container mx-auto px-6 md:px-12 relative z-10"
-      >
+      <div className="container mx-auto px-6 md:px-12 relative z-10">
         <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-start">
           {/* INFO & FAQ SIDE */}
           <div className="flex flex-col gap-12">
@@ -187,24 +180,18 @@ export function Contact() {
                       <span className="text-sm font-medium text-white/90 pr-4">{faq.q}</span>
                       <ChevronDown className={cn("w-4 h-4 text-white/50 shrink-0 transition-transform duration-300", openFaq === i && "rotate-180")} />
                     </button>
-                    <AnimatePresence>
-                      {openFaq === i && (
-                        <motion.div
-                          id={`faq-panel-${i}`}
-                          role="region"
-                          aria-labelledby={`faq-trigger-${i}`}
-                          initial={{ height: 0, opacity: 0 }}
-                          animate={{ height: "auto", opacity: 1 }}
-                          exit={{ height: 0, opacity: 0 }}
-                          transition={{ duration: 0.3, ease: "easeInOut" }}
-                          className="overflow-hidden"
-                        >
-                          <div className="px-4 sm:px-6 pb-5 text-sm text-muted-foreground leading-relaxed border-t border-white/5 pt-4">
-                            {faq.a}
-                          </div>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
+                    {openFaq === i && (
+                      <div
+                        id={`faq-panel-${i}`}
+                        role="region"
+                        aria-labelledby={`faq-trigger-${i}`}
+                        className="overflow-hidden"
+                      >
+                        <div className="px-4 sm:px-6 pb-5 text-sm text-muted-foreground leading-relaxed border-t border-white/5 pt-4">
+                          {faq.a}
+                        </div>
+                      </div>
+                    )}
                   </div>
                 ))}
               </div>
@@ -217,15 +204,8 @@ export function Contact() {
               <div className="w-3/4 h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent" />
             </div>
 
-            <AnimatePresence mode="wait">
-              {submitStatus === "success" ? (
-                <motion.div
-                  key="success"
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0 }}
-                  className="flex flex-col items-center justify-center text-center py-20"
-                >
+            {submitStatus === "success" ? (
+              <div className="flex flex-col items-center justify-center text-center py-20">
                   <div className="w-16 h-16 bg-emerald-500/10 border border-emerald-500/20 rounded-full flex items-center justify-center mb-6">
                     <CheckCircle2 className="w-8 h-8 text-emerald-400" />
                   </div>
@@ -237,13 +217,9 @@ export function Contact() {
                   <Button variant="outline" onClick={() => setSubmitStatus("idle")}>
                     Invia un&apos;altra richiesta
                   </Button>
-                </motion.div>
+                </div>
               ) : (
-                <motion.form
-                  key="form"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
+                <form
                   className="space-y-6"
                   onSubmit={handleSubmit}
                   onFocusCapture={trackFormStart}
@@ -337,12 +313,11 @@ export function Contact() {
                       </div>
                     ) : "Invia la richiesta"}
                   </Button>
-                </motion.form>
+                </form>
               )}
-            </AnimatePresence>
           </div>
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 }

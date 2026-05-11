@@ -5,7 +5,6 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/Button";
 import { Menu, X } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
 import { FiloLogoFull } from "@/components/brand/FiloLogo";
 import { trackEvent, type AnalyticsEventName } from "@/lib/analytics";
 
@@ -14,8 +13,13 @@ export function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
 
   React.useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", handleScroll);
+    const handleScroll = () => {
+      const nextIsScrolled = window.scrollY > 20;
+      setIsScrolled((current) => (current === nextIsScrolled ? current : nextIsScrolled));
+    };
+
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -78,41 +82,36 @@ export function Navbar() {
         </button>
       </div>
 
-      <AnimatePresence>
-        {isMobileMenuOpen && (
-          <motion.div
-            id="mobile-menu"
-            initial={{ opacity: 0, y: -16 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -16 }}
-            className="absolute top-full left-0 w-full glass-panel border-t border-white/5 py-5 px-6 flex flex-col space-y-4 md:hidden"
-          >
-            {navLinks.map((link) => (
-              <Link
-                key={link.name}
-                href={link.href}
-                onClick={() => {
-                  if (link.event) trackEvent(link.event, { location: "mobile_navbar", route: window.location.pathname });
-                  setIsMobileMenuOpen(false);
-                }}
-                className="text-base font-medium text-[#B5B5BE] hover:text-white transition-colors"
-              >
-                {link.name}
-              </Link>
-            ))}
-            <Button
-              variant="premium"
-              className="w-full mt-2"
+      {isMobileMenuOpen && (
+        <div
+          id="mobile-menu"
+          className="absolute top-full left-0 w-full glass-panel border-t border-white/5 py-5 px-6 flex flex-col space-y-4 md:hidden"
+        >
+          {navLinks.map((link) => (
+            <Link
+              key={link.name}
+              href={link.href}
               onClick={() => {
+                if (link.event) trackEvent(link.event, { location: "mobile_navbar", route: window.location.pathname });
                 setIsMobileMenuOpen(false);
-                scrollToContact("mobile_navbar");
               }}
+              className="text-base font-medium text-[#B5B5BE] hover:text-white transition-colors"
             >
-              Richiedi una demo
-            </Button>
-          </motion.div>
-        )}
-      </AnimatePresence>
+              {link.name}
+            </Link>
+          ))}
+          <Button
+            variant="premium"
+            className="w-full mt-2"
+            onClick={() => {
+              setIsMobileMenuOpen(false);
+              scrollToContact("mobile_navbar");
+            }}
+          >
+            Richiedi una demo
+          </Button>
+        </div>
+      )}
     </header>
   );
 }
